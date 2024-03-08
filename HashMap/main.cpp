@@ -64,5 +64,28 @@ void foo()
 }
 
 int main() {
-    foo();
+//    foo();
+    HashMap<vector<int>> a(.4);
+    for (int i = 0; i < 8; i ++) {
+        vector<int> v;
+        v.push_back(i);
+        a.insert(to_string(i), v);
+        cout << "inserted, size now: " << a.size() << endl;
+    }
+    for (int i = 0; i < 8; i ++) {
+        vector<int>* v = a.find(to_string(i));
+        if (v != nullptr) {
+            cout << to_string(i) << " v exists" << endl;
+        }
+    }
+//    vector<int> v1 = a["1"];
+//    for(const auto &p: v1) {
+//        cout << p << endl;
+//    }
+//    v1.push_back(2);
+////    a.insert("1", v1);
+//    a["1"] = v1;
+//    for(const auto &p: v1) {
+//        cout << p << endl;
+//    }
 }

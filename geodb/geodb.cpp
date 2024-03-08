@@ -26,7 +26,7 @@ bool GeoDatabase::load(const std::string& map_data_file) {
     int counter = 0;
     while (getline(infile, line))
     {
-        cout << "reading place " << counter << endl;
+//        cout << "reading place " << counter << endl;
         counter ++;
         istringstream nameString(line);
         string name;
@@ -52,15 +52,25 @@ bool GeoDatabase::load(const std::string& map_data_file) {
 //        pair<string, string> pair3;
 //        pair3.first = point1.to_string() + point2.to_string();
 //        pair3.second = name;
-//        
+        
 //        m_connectedPoints.insert(pair1);
 //        m_connectedPoints.insert(pair2);
 //        m_streets.insert(pair3);
         
-//        m_connectedPoints.insert(point1.to_string(), point2);
-//        m_connectedPoints.insert(point2.to_string(), point1);
-//
-//        m_streets.insert(point1.to_string() + point2.to_string(), name);
+        
+        cerr << "inserting points: " << endl;
+        cerr << "point 1: " << point1.to_string() << endl;
+        cerr << "point 2: " << point2.to_string() << endl << endl;
+        
+        vector<GeoPoint> v1 = m_connectedPoints[point1.to_string()];
+        v1.push_back(point2);
+        vector<GeoPoint> v2 = m_connectedPoints[point2.to_string()];
+        v2.push_back(point1);
+        
+        m_connectedPoints.insert(point1.to_string(), v1);
+        m_connectedPoints.insert(point2.to_string(), v2);
+
+        m_streets.insert(point1.to_string() + point2.to_string(), name);
         
         // end debugging
         
@@ -72,8 +82,8 @@ bool GeoDatabase::load(const std::string& map_data_file) {
         
         numPoiString >> numPois;
         if (numPois != 0) { // case where pois must be iterated through
-            cout << "inserting poi" << endl;
             for (int i = 0; i < numPois; i ++) {
+//                cout << "inserting poi" << endl;
                 getline(infile, line);
                 istringstream poiString(line);
                 string poiName;
@@ -96,16 +106,16 @@ bool GeoDatabase::load(const std::string& map_data_file) {
                 }
                 name = name.substr(0, name.size() - 1); // removing extra space
                 // adding to hashmap
-                cerr << name << endl;
+//                cerr << name << endl;
                 
                 // for debugging
-                pair<string, GeoPoint> pair1;
-                pair1.first = name;
-                pair1.second = GeoPoint(lat_val, long_val);
-                
-                cout << "inserting with " << pair1.second.to_string() << endl;
-                m_poiMap.insert(pair1);
-//                m_poiMap.insert(name, GeoPoint(lat_val, long_val));
+//                pair<string, GeoPoint> pair1;
+//                pair1.first = name;
+//                pair1.second = GeoPoint(lat_val, long_val);
+//                
+//                cout << "inserting with " << pair1.second.to_string() << endl;
+//                m_poiMap.insert(pair1);
+                m_poiMap.insert(name, GeoPoint(lat_val, long_val));
                 
                 // end debugging
             }
@@ -118,28 +128,24 @@ bool GeoDatabase::get_poi_location(const std::string& poi, GeoPoint& point) cons
     cout << m_poiMap.size() << endl;
     
     // for debugging
-    if (m_poiMap.find(poi) == m_poiMap.end())
-        return false;
-    else
-        return true;
-//    if (p != nullptr) {
-//        point = *p;
+//    if (m_poiMap.find(poi) == m_poiMap.end())
+//        return false;
+//    else
 //        return true;
-//    }
     
-//    GeoPoint* p = m_poiMap.find(poi);
-//    if (p != nullptr) {
-//        point = *p;
-//        return true;
-//    }
-//    
+    GeoPoint* p = m_poiMap.find(poi);
+    if (p != nullptr) {
+        point = *p;
+        return true;
+    }
+    
     // end debugging
     return false;
 }
 
 std::vector<GeoPoint> GeoDatabase::get_connected_points(const GeoPoint& pt) const {
-    vector<GeoPoint> points;
-    return points;
+    vector<GeoPoint>* points = m_connectedPoints.find(pt.to_string());
+    return *points;
 }
 
 std::string GeoDatabase::get_street_name(const GeoPoint& pt1, const GeoPoint& pt2) const {

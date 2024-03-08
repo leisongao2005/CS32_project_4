@@ -28,14 +28,14 @@ public:
     virtual std::string get_street_name(const GeoPoint& pt1,
     const GeoPoint& pt2) const;
 private:
-//    HashMap<GeoPoint> m_poiMap; // point of contact
-//    HashMap<GeoPoint> m_connectedPoints; // other points
-//    HashMap<std::string> m_streets; // hash with two coordinates together, key is street name
+    HashMap<GeoPoint> m_poiMap; // point of contact
+    HashMap<std::vector<GeoPoint>> m_connectedPoints; // other points
+    HashMap<std::string> m_streets; // hash with two coordinates together, key is street name
 
     
-    std::unordered_map<std::string, GeoPoint> m_poiMap; // point of contact
-    std::unordered_map<std::string, GeoPoint> m_connectedPoints; // other points
-    std::unordered_map<std::string, std::string> m_streets; // hash with two coordinates together, key is street name
+//    std::unordered_map<std::string, GeoPoint> m_poiMap; // point of contact
+//    std::unordered_map<std::string, GeoPoint> m_connectedPoints; // other points
+//    std::unordered_map<std::string, std::string> m_streets; // hash with two coordinates together, key is street name
 };
 
 /* 
