@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D709E8F92B997F0500433AA5 /* geodb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E8F72B997F0500433AA5 /* geodb.cpp */; };
+		D709E8FB2B99800D00433AA5 /* geodbTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E8FA2B99800D00433AA5 /* geodbTest.cpp */; };
 		D760FE972B9964D6004BD6F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D760FE962B9964D6004BD6F1 /* main.cpp */; };
 		D760FEAB2B99679E004BD6F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D760FEAA2B99679E004BD6F1 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D709E8EE2B997EFA00433AA5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		D760FE912B9964D6004BD6F1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +44,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D709E8F02B997EFA00433AA5 /* geodb */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = geodb; sourceTree = BUILT_PRODUCTS_DIR; };
+		D709E8F72B997F0500433AA5 /* geodb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = geodb.cpp; sourceTree = "<group>"; };
+		D709E8F82B997F0500433AA5 /* geodb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = geodb.h; sourceTree = "<group>"; };
+		D709E8FA2B99800D00433AA5 /* geodbTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = geodbTest.cpp; sourceTree = "<group>"; };
+		D709E8FD2B9A81A400433AA5 /* mapdatatest.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = mapdatatest.txt; sourceTree = "<group>"; };
 		D760FE932B9964D6004BD6F1 /* project_4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = project_4; sourceTree = BUILT_PRODUCTS_DIR; };
 		D760FE962B9964D6004BD6F1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D760FE9D2B99653B004BD6F1 /* mapdata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mapdata.txt; sourceTree = "<group>"; };
@@ -47,6 +63,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D709E8ED2B997EFA00433AA5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D760FE902B9964D6004BD6F1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -64,11 +87,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D709E8F12B997EFA00433AA5 /* geodb */ = {
+			isa = PBXGroup;
+			children = (
+				D760FE9D2B99653B004BD6F1 /* mapdata.txt */,
+				D709E8F72B997F0500433AA5 /* geodb.cpp */,
+				D709E8FD2B9A81A400433AA5 /* mapdatatest.txt */,
+				D709E8FA2B99800D00433AA5 /* geodbTest.cpp */,
+				D709E8F82B997F0500433AA5 /* geodb.h */,
+			);
+			path = geodb;
+			sourceTree = "<group>";
+		};
 		D760FE8A2B9964D6004BD6F1 = {
 			isa = PBXGroup;
 			children = (
 				D760FE952B9964D6004BD6F1 /* project_4 */,
 				D760FEA92B99679E004BD6F1 /* HashMap */,
+				D709E8F12B997EFA00433AA5 /* geodb */,
 				D760FE942B9964D6004BD6F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,6 +114,7 @@
 			children = (
 				D760FE932B9964D6004BD6F1 /* project_4 */,
 				D760FEA82B99679E004BD6F1 /* Hashmap */,
+				D709E8F02B997EFA00433AA5 /* geodb */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,7 +125,6 @@
 				D760FEA02B99653B004BD6F1 /* base_classes.h */,
 				D760FE9F2B99653B004BD6F1 /* geopoint.h */,
 				D760FE9E2B99653B004BD6F1 /* geotools.h */,
-				D760FE9D2B99653B004BD6F1 /* mapdata.txt */,
 				D760FEA12B99653B004BD6F1 /* stops.h */,
 				D760FEA22B99653B004BD6F1 /* tourcmd.h */,
 				D760FE962B9964D6004BD6F1 /* main.cpp */,
@@ -108,6 +144,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D709E8EF2B997EFA00433AA5 /* geodb */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D709E8F62B997EFA00433AA5 /* Build configuration list for PBXNativeTarget "geodb" */;
+			buildPhases = (
+				D709E8EC2B997EFA00433AA5 /* Sources */,
+				D709E8ED2B997EFA00433AA5 /* Frameworks */,
+				D709E8EE2B997EFA00433AA5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = geodb;
+			productName = geodb;
+			productReference = D709E8F02B997EFA00433AA5 /* geodb */;
+			productType = "com.apple.product-type.tool";
+		};
 		D760FE922B9964D6004BD6F1 /* project_4 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D760FE9A2B9964D6004BD6F1 /* Build configuration list for PBXNativeTarget "project_4" */;
@@ -151,6 +204,9 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					D709E8EF2B997EFA00433AA5 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					D760FE922B9964D6004BD6F1 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -174,11 +230,21 @@
 			targets = (
 				D760FE922B9964D6004BD6F1 /* project_4 */,
 				D760FEA72B99679E004BD6F1 /* Hashmap */,
+				D709E8EF2B997EFA00433AA5 /* geodb */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D709E8EC2B997EFA00433AA5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D709E8F92B997F0500433AA5 /* geodb.cpp in Sources */,
+				D709E8FB2B99800D00433AA5 /* geodbTest.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D760FE8F2B9964D6004BD6F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,6 +264,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		D709E8F42B997EFA00433AA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D709E8F52B997EFA00433AA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		D760FE982B9964D6004BD6F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -348,6 +430,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D709E8F62B997EFA00433AA5 /* Build configuration list for PBXNativeTarget "geodb" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D709E8F42B997EFA00433AA5 /* Debug */,
+				D709E8F52B997EFA00433AA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D760FE8E2B9964D6004BD6F1 /* Build configuration list for PBXProject "project_4" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

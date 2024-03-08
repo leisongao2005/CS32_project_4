@@ -86,24 +86,52 @@ int HashMap<T>::size() const {
 
 template <typename T>
 void HashMap<T>::reallocate() {
-    std::vector<Node*> temp {static_cast<size_t>(2*m_numBuckets)};
+    std::vector<Node*> temp_nodes {static_cast<size_t>(2*m_numBuckets)};
     
     for (int i = 0; i < m_numBuckets; i ++) { // iterate over original hashtable
         if (m_nodes.at(i) != nullptr) {
             Node* p = m_nodes.at(i);
-            size_t hashKey = hashString(p->m_key, true); // rehash current item
-            temp.at(hashKey) = p; // store item in new hashtable
+            size_t hashKey = hashString(p->m_key, true); // rehash current item and store item in new hashtable
+            if (temp_nodes.at(hashKey) == nullptr) { // when bucket is empty simply reassing
+                temp_nodes.at(hashKey) = p;
+            }
+            else { // bucket is not empty, must first trace to end of linked list
+                Node* p_temp = temp_nodes.at(hashKey);
+                while (p_temp->next != nullptr) {
+                    if (p_temp->m_key == p->m_key) {
+                        p_temp->m_val = p->m_val; // reassigment if duplicate
+                        return;
+                    }
+                    p_temp = p_temp->next;
+                }
+                p_temp->next = p;
+            }
             
             Node* next_p = p->next; // store next value
             p->next = nullptr; // make sure no longer linked
             
-            while (next_p != nullptr) { // must check entire linked list
-                hashKey = hashString(next_p->m_key, true);
-                temp.at(hashKey) = next_p;
+            while (next_p != nullptr) { // must check entire linked list and insert all of those
+                size_t hashKey = hashString(p->m_key, true); // rehash current item and store item in new hashtable
+                if (temp_nodes.at(hashKey) == nullptr) { // when bucket is empty simply reassing
+                    temp_nodes.at(hashKey) = p;
+                }
+                else { // bucket is not empty, must first trace to end of linked list
+                    Node* p_temp = temp_nodes.at(hashKey);
+                    while (p_temp->next != nullptr) {
+                        if (p_temp->m_key == p->m_key) {
+                            p_temp->m_val = p->m_val; // reassigment if duplicate
+                            return;
+                        }
+                        p_temp = p_temp->next;
+                    }
+                    p_temp->next = p;
+                }
+                next_p = next_p->next;
             }
         }
     }
-    m_nodes = temp; // vector assignment operator should free memory of old hashmap
+    m_nodes = temp_nodes; // vector assignment operator should free memory of old hashmap
+    m_numBuckets *= 2;
 }
 
 template <typename T>

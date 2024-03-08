@@ -17,13 +17,41 @@ void foo()
     // Add new items to the hashmap. Inserting the third item will cause
     // the hashmap to increase the number of buckets (since the maximum
     // load factor is 0.3), forcing a rehash of all items.
-    nameToGPA.insert("Carey", 3.5); // Carey has a 3.5 GPA
-    nameToGPA.insert("David", 2.99); // David needs to up his game
+    nameToGPA.insert("1", 3.5); // Carey has a 3.5 GPA
+    nameToGPA.insert("2", 2.99); // David needs to up his game
     cout << nameToGPA.size() << endl;
-    cout << nameToGPA["Carey"] << endl;
-    cout << nameToGPA["David"] << endl;
+    nameToGPA.insert("3", 3.5);
+    
+    double* g1 = nameToGPA.find("1");
+    if (g1 != nullptr)
+        cout << "found" << endl;
+    else
+        cout << "not found" << endl;
+    cout << "load factor = 0.3, next should reallocate" << endl;
+    nameToGPA.insert("4", 3.5);
+    nameToGPA.insert("5", 3.5);
+    nameToGPA.insert("6", 3.5);
+    nameToGPA.insert("7", 3.5);
+    
+    g1 = nameToGPA.find("1");
+    if (g1 != nullptr)
+        cout << "found" << endl;
+    else
+        cout << "not found" << endl;
+    cout << "load factor = 0.3, next should reallocate" << endl;
+    nameToGPA.insert("8", 3.5);
+    nameToGPA.insert("9", 3.5);
+    
+    g1 = nameToGPA.find("2");
+    if (g1 != nullptr)
+        cout << "found" << endl;
+    else
+        cout << "not found" << endl;
+    cout << nameToGPA.size() << endl;
+    
     // you can also use brackets like C++'s unordered_map!
     nameToGPA["Annie"] = 3.85; // Adds Annie, who has the highest GPA of all
+    nameToGPA.insert("Annie", 3.85);
     double* davidsGPA = nameToGPA.find("David");
     if (davidsGPA != nullptr) {
         *davidsGPA = 3.1; // after a re-grade of David's exam, update 2.99 -> 3.1
