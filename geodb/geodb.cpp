@@ -31,9 +31,13 @@ bool GeoDatabase::load(const std::string& map_data_file) {
         counter ++;
         istringstream nameString(line);
         string name;
+        string name_part;
         string lat1, long1, lat2, long2;
         // get name first
-        nameString >> name;
+        while (nameString >> name_part)
+            name += name_part + " ";
+        name = name.substr(0, name.size() - 1);
+        
         getline(infile, line);
         istringstream coordString(line);
         // getting coordinates
@@ -72,6 +76,7 @@ bool GeoDatabase::load(const std::string& map_data_file) {
         m_connectedPoints.insert(point2.to_string(), v2);
 
         m_streets.insert(point1.to_string() + point2.to_string(), name);
+//        m_streets.insert(point2.to_string() + point1.to_string(), name);
         
         // end debugging
         
@@ -101,7 +106,9 @@ bool GeoDatabase::load(const std::string& map_data_file) {
             m_connectedPoints.insert(point2.to_string(), v3);
             
             m_streets.insert(point1.to_string() + midpoint(point1, point2).to_string(), name);
-            m_streets.insert(midpoint(point1, point2).to_string() + point2.to_string(), name);
+            m_streets.insert(point2.to_string() + midpoint(point1, point2).to_string(), name);
+//            m_streets.insert(midpoint(point1, point2).to_string() + point1.to_string(), "a path");
+//            m_streets.insert(midpoint(point1, point2).to_string() + point2.to_string(), "a path");
             
             for (int i = 0; i < numPois; i ++) {
 //                cout << "inserting poi" << endl;
@@ -137,7 +144,7 @@ bool GeoDatabase::load(const std::string& map_data_file) {
                 m_connectedPoints.insert(midpoint(point1, point2).to_string(), v1);
                 m_connectedPoints.insert(poi.to_string(), v2);
                 
-                m_streets.insert(poi.to_string() + midpoint(point1, point2).to_string(), name);
+                m_streets.insert(poi.to_string() + midpoint(point1, point2).to_string(), "a path");
                 // adding to hashmap
 //                cerr << name << endl;
                 
@@ -189,10 +196,10 @@ std::string GeoDatabase::get_street_name(const GeoPoint& pt1, const GeoPoint& pt
 //        return s1;
 //    return s2;
     
-    if (m_streets.find(pt1.to_string() + " ," + pt2.to_string()) != nullptr)
-        return *m_streets.find(pt1.to_string() + " ," + pt2.to_string());
-    else if (m_streets.find(pt2.to_string() + " ," + pt1.to_string()) != nullptr)
-        return *m_streets.find(pt2.to_string() + " ," + pt1.to_string());
+    if (m_streets.find(pt1.to_string() + pt2.to_string()) != nullptr)
+        return *m_streets.find(pt1.to_string() + pt2.to_string());
+    else if (m_streets.find(pt2.to_string() + pt1.to_string()) != nullptr)
+        return *m_streets.find(pt2.to_string() + pt1.to_string());
     else
         return "";
 }

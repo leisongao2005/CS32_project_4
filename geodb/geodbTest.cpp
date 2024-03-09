@@ -34,11 +34,10 @@ int main() {
             cout << p.sLatitude << ", " << p.sLongitude << endl;
     }
     
-    GeoPoint p1("34.0732851", "-118.4931016");
-    GeoPoint p2("34.0736122", "-118.4927669");
-    
+    GeoPoint p1("34.0601422", "-118.4468929");
+    GeoPoint p2("34.0600768", "-118.4467216");
     cout << g.get_street_name(p1, p2) << endl; // writes "Glenmere Way"
-    cout << g.get_street_name(p2, p1) << endl; // writes "Glenmere Way"
+    cout << g.get_street_name(p2, p1) << endl; // writes "Glenmere Way" // writes "a path"
 }
 
 /*
