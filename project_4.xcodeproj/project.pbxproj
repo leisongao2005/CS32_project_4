@@ -9,12 +9,23 @@
 /* Begin PBXBuildFile section */
 		D709E8F92B997F0500433AA5 /* geodb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E8F72B997F0500433AA5 /* geodb.cpp */; };
 		D709E8FB2B99800D00433AA5 /* geodbTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E8FA2B99800D00433AA5 /* geodbTest.cpp */; };
+		D709E9132B9CF20500433AA5 /* routertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E9122B9CF20500433AA5 /* routertest.cpp */; };
+		D709E9192B9CF20F00433AA5 /* router.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E9172B9CF20F00433AA5 /* router.cpp */; };
 		D760FE972B9964D6004BD6F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D760FE962B9964D6004BD6F1 /* main.cpp */; };
 		D760FEAB2B99679E004BD6F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D760FEAA2B99679E004BD6F1 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D709E8EE2B997EFA00433AA5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D709E90E2B9CF20500433AA5 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -49,6 +60,10 @@
 		D709E8F82B997F0500433AA5 /* geodb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = geodb.h; sourceTree = "<group>"; };
 		D709E8FA2B99800D00433AA5 /* geodbTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = geodbTest.cpp; sourceTree = "<group>"; };
 		D709E8FD2B9A81A400433AA5 /* mapdatatest.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = mapdatatest.txt; sourceTree = "<group>"; };
+		D709E9102B9CF20500433AA5 /* router */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = router; sourceTree = BUILT_PRODUCTS_DIR; };
+		D709E9122B9CF20500433AA5 /* routertest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = routertest.cpp; sourceTree = "<group>"; };
+		D709E9172B9CF20F00433AA5 /* router.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = router.cpp; sourceTree = "<group>"; };
+		D709E9182B9CF20F00433AA5 /* router.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = router.h; sourceTree = "<group>"; };
 		D760FE932B9964D6004BD6F1 /* project_4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = project_4; sourceTree = BUILT_PRODUCTS_DIR; };
 		D760FE962B9964D6004BD6F1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D760FE9D2B99653B004BD6F1 /* mapdata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mapdata.txt; sourceTree = "<group>"; };
@@ -64,6 +79,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		D709E8ED2B997EFA00433AA5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D709E90D2B9CF20500433AA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -99,12 +121,23 @@
 			path = geodb;
 			sourceTree = "<group>";
 		};
+		D709E9112B9CF20500433AA5 /* router */ = {
+			isa = PBXGroup;
+			children = (
+				D709E9122B9CF20500433AA5 /* routertest.cpp */,
+				D709E9172B9CF20F00433AA5 /* router.cpp */,
+				D709E9182B9CF20F00433AA5 /* router.h */,
+			);
+			path = router;
+			sourceTree = "<group>";
+		};
 		D760FE8A2B9964D6004BD6F1 = {
 			isa = PBXGroup;
 			children = (
 				D760FE952B9964D6004BD6F1 /* project_4 */,
 				D760FEA92B99679E004BD6F1 /* HashMap */,
 				D709E8F12B997EFA00433AA5 /* geodb */,
+				D709E9112B9CF20500433AA5 /* router */,
 				D760FE942B9964D6004BD6F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,6 +148,7 @@
 				D760FE932B9964D6004BD6F1 /* project_4 */,
 				D760FEA82B99679E004BD6F1 /* Hashmap */,
 				D709E8F02B997EFA00433AA5 /* geodb */,
+				D709E9102B9CF20500433AA5 /* router */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +193,23 @@
 			name = geodb;
 			productName = geodb;
 			productReference = D709E8F02B997EFA00433AA5 /* geodb */;
+			productType = "com.apple.product-type.tool";
+		};
+		D709E90F2B9CF20500433AA5 /* router */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D709E9162B9CF20500433AA5 /* Build configuration list for PBXNativeTarget "router" */;
+			buildPhases = (
+				D709E90C2B9CF20500433AA5 /* Sources */,
+				D709E90D2B9CF20500433AA5 /* Frameworks */,
+				D709E90E2B9CF20500433AA5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = router;
+			productName = router;
+			productReference = D709E9102B9CF20500433AA5 /* router */;
 			productType = "com.apple.product-type.tool";
 		};
 		D760FE922B9964D6004BD6F1 /* project_4 */ = {
@@ -207,6 +258,9 @@
 					D709E8EF2B997EFA00433AA5 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
+					D709E90F2B9CF20500433AA5 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 					D760FE922B9964D6004BD6F1 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -231,6 +285,7 @@
 				D760FE922B9964D6004BD6F1 /* project_4 */,
 				D760FEA72B99679E004BD6F1 /* Hashmap */,
 				D709E8EF2B997EFA00433AA5 /* geodb */,
+				D709E90F2B9CF20500433AA5 /* router */,
 			);
 		};
 /* End PBXProject section */
@@ -242,6 +297,15 @@
 			files = (
 				D709E8F92B997F0500433AA5 /* geodb.cpp in Sources */,
 				D709E8FB2B99800D00433AA5 /* geodbTest.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D709E90C2B9CF20500433AA5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D709E9192B9CF20F00433AA5 /* router.cpp in Sources */,
+				D709E9132B9CF20500433AA5 /* routertest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +337,22 @@
 			name = Debug;
 		};
 		D709E8F52B997EFA00433AA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D709E9142B9CF20500433AA5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D709E9152B9CF20500433AA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -435,6 +515,15 @@
 			buildConfigurations = (
 				D709E8F42B997EFA00433AA5 /* Debug */,
 				D709E8F52B997EFA00433AA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D709E9162B9CF20500433AA5 /* Build configuration list for PBXNativeTarget "router" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D709E9142B9CF20500433AA5 /* Debug */,
+				D709E9152B9CF20500433AA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
