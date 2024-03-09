@@ -7,6 +7,7 @@
 #include "geodb.h"
 #include "router.h"
 #include "stops.h"
+#include "tourcmd.h"
 #include "tour_generator.h"
 
 using namespace std;
@@ -56,7 +57,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 3)
     {
-        cout << "usage: BruinNav mapdata.txt stops.txt\n";
+        cout << "usage: BruinTour mapdata.txt stops.txt\n";
         return 1;
     }
 

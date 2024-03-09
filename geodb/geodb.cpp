@@ -7,6 +7,7 @@
 
 #include "geodb.h"
 #include "HashMap.h"
+#include "geotools.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -58,10 +59,10 @@ bool GeoDatabase::load(const std::string& map_data_file) {
 //        m_streets.insert(pair3);
         
         
-        cerr << "inserting points: " << endl;
-        cerr << "point 1: " << point1.to_string() << endl;
-        cerr << "point 2: " << point2.to_string() << endl << endl;
-        
+//        cerr << "inserting points: " << endl;
+//        cerr << "point 1: " << point1.to_string() << endl;
+//        cerr << "point 2: " << point2.to_string() << endl << endl;
+//        
         vector<GeoPoint> v1 = m_connectedPoints[point1.to_string()];
         v1.push_back(point2);
         vector<GeoPoint> v2 = m_connectedPoints[point2.to_string()];
@@ -82,6 +83,26 @@ bool GeoDatabase::load(const std::string& map_data_file) {
         
         numPoiString >> numPois;
         if (numPois != 0) { // case where pois must be iterated through
+            
+            // add midpoint to connected points and streets
+            
+            vector<GeoPoint> v1 = m_connectedPoints[midpoint(point1, point2).to_string()];
+            v1.push_back(point1);
+            v1.push_back(point2);
+            
+            vector<GeoPoint> v2 = m_connectedPoints[point1.to_string()];
+            v2.push_back(midpoint(point1, point2));
+            
+            vector<GeoPoint> v3 = m_connectedPoints[point2.to_string()];
+            v3.push_back(midpoint(point1, point2));
+            
+            m_connectedPoints.insert(midpoint(point1, point2).to_string(), v1);
+            m_connectedPoints.insert(point1.to_string(), v2);
+            m_connectedPoints.insert(point2.to_string(), v3);
+            
+            m_streets.insert(point1.to_string() + midpoint(point1, point2).to_string(), name);
+            m_streets.insert(midpoint(point1, point2).to_string() + point2.to_string(), name);
+            
             for (int i = 0; i < numPois; i ++) {
 //                cout << "inserting poi" << endl;
                 getline(infile, line);
@@ -105,6 +126,18 @@ bool GeoDatabase::load(const std::string& map_data_file) {
                     name += poiName + " ";
                 }
                 name = name.substr(0, name.size() - 1); // removing extra space
+                
+                GeoPoint poi = GeoPoint(lat_val, long_val);
+                
+                vector<GeoPoint> v1 = m_connectedPoints[midpoint(point1, point2).to_string()];
+                v1.push_back(poi);
+                vector<GeoPoint> v2 = m_connectedPoints[poi.to_string()];
+                v2.push_back(midpoint(point1, point2));
+                
+                m_connectedPoints.insert(midpoint(point1, point2).to_string(), v1);
+                m_connectedPoints.insert(poi.to_string(), v2);
+                
+                m_streets.insert(poi.to_string() + midpoint(point1, point2).to_string(), name);
                 // adding to hashmap
 //                cerr << name << endl;
                 
@@ -149,5 +182,17 @@ std::vector<GeoPoint> GeoDatabase::get_connected_points(const GeoPoint& pt) cons
 }
 
 std::string GeoDatabase::get_street_name(const GeoPoint& pt1, const GeoPoint& pt2) const {
-    return "";
+//    string s1 = *m_streets.find(pt1.to_string() + " ," + pt2.to_string());
+//    string s2 = *m_streets.find(pt2.to_string() + " ," + pt1.to_string());
+//    
+//    if (s1 > s2)
+//        return s1;
+//    return s2;
+    
+    if (m_streets.find(pt1.to_string() + " ," + pt2.to_string()) != nullptr)
+        return *m_streets.find(pt1.to_string() + " ," + pt2.to_string());
+    else if (m_streets.find(pt2.to_string() + " ," + pt1.to_string()) != nullptr)
+        return *m_streets.find(pt2.to_string() + " ," + pt1.to_string());
+    else
+        return "";
 }

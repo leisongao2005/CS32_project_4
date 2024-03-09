@@ -98,7 +98,7 @@ int HashMap<T>::size() const {
 
 template <typename T>
 void HashMap<T>::rehash() {
-    std::cout << "rehash" << std::endl;
+//    std::cout << "rehash" << std::endl;
     std::vector<Node*> old_map(m_map);
     
     m_map.clear();
@@ -162,7 +162,7 @@ void HashMap<T>::rehash() {
 
 template <typename T>
 void HashMap<T>::insert(const std::string& key, const T& value) {
-    cout << "inserting value" << endl;
+//    cout << "inserting value" << endl;
     
     size_t hashKey = hashString(key);
     

@@ -25,7 +25,7 @@ int main() {
 //    GeoDatabase g;
 //    g.load("mapdata.txt"); // assume this works to avoid error checking
 //    
-    std::vector<GeoPoint> pts = g.get_connected_points(GeoPoint("34.0736122", "-118.4927669"));
+    std::vector<GeoPoint> pts = g.get_connected_points(GeoPoint("34.0600768", "-118.4467216"));
     cout << pts.size() << endl;
     if (pts.empty())
         cout << "There are no points connected to your specified point\n";
@@ -33,6 +33,12 @@ int main() {
         for (const auto &p: pts)
             cout << p.sLatitude << ", " << p.sLongitude << endl;
     }
+    
+    GeoPoint p1("34.0732851", "-118.4931016");
+    GeoPoint p2("34.0736122", "-118.4927669");
+    
+    cout << g.get_street_name(p1, p2) << endl; // writes "Glenmere Way"
+    cout << g.get_street_name(p2, p1) << endl; // writes "Glenmere Way"
 }
 
 /*

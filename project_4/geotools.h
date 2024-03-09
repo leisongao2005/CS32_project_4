@@ -25,15 +25,7 @@ inline double rad2deg(double rad) {
   return (rad * 180 / pi);
 }
 
-/**
-* Returns the distance between two points on the Earth.
-* Direct translation from http://en.wikipedia.org/wiki/Haversine_formula
-* @param lat1d Latitude of the first point in degrees
-* @param lon1d Longitude of the first point in degrees
-* @param lat2d Latitude of the second point in degrees
-* @param lon2d Longitude of the second point in degrees
-* @return The distance between the two points in kilometers
-*/
+
 inline double distance_earth_km(const GeoPoint &g1, const GeoPoint &g2) {
   double lat1r, lon1r, lat2r, lon2r, u, v;
   lat1r = deg2rad(g1.latitude);
