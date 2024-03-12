@@ -1,12 +1,11 @@
 //
 //  main.cpp
-//  router
+//  tourGenerator
 //
 //  Created by Leison Gao on 3/9/24.
 //
 
 #include <iostream>
-#include "router.h"
 
 int main(int argc, const char * argv[]) {
     // insert code here...

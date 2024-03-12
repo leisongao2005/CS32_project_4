@@ -19,7 +19,7 @@ class HashMap
 {
 public:
     HashMap(double max_load = 0.75); // constructor
-    ~HashMap() {}; // destructor; deletes all of the items in the hashmap
+    ~HashMap(); // destructor; deletes all of the items in the hashmap
     int size() const; // return the number of associations in the hashmap
     // The insert method associates one item (key) with another (value).
     // If no association currently exists with that key, this method inserts
@@ -48,6 +48,7 @@ private:
         T m_val;
         Node* next;
         
+        Node() {}
         Node(std::string key, T value, Node* next_node = nullptr) {
             this->m_key = key;
             this->m_val = value;
@@ -67,10 +68,20 @@ private:
     }
     
     void rehash();
-//    bool insertHelper(const std::string& key, const T& value, std::vector<Node*>& table, int hashSize);
-    
 };
 
+template <typename T>
+HashMap<T>::~HashMap() {
+    for (int i = 0; i != m_map.size(); i ++) {
+        Node* p = m_map[i];
+        Node* np;
+        while (p != nullptr) {
+            np = p->next;
+            delete p;
+            p = np;
+        }
+    }
+}
 
 template <typename T>
 size_t HashMap<T>::hashString(std::string s) const{
@@ -109,55 +120,20 @@ void HashMap<T>::rehash() {
     
     for (int i = 0; i != old_map.size(); i ++) {
         Node* p = old_map[i];
+        Node* next_p;
         while (p != nullptr) {
-            insert(p->m_key, p->m_val);
-            p = p->next;
+            // insert p into the new map
+            size_t hashKey = hashString(p->m_key);
+            Node* np = m_map[hashKey];
+            m_map[hashKey] = p;
+            m_size ++;
+            
+            // update p-> next position
+            next_p = p->next;
+            p->next = np;
+            p = next_p;
         }
     }
-    
-//    std::vector<Node*> old_nodes(m_nodes);
-//    m_nodes.clear();
-//    m_nodes.resize(2*m_numBuckets);
-//    
-//    for (int i = 0; i < m_numBuckets; i ++) { // iterate over original hashtable
-//        if (old_nodes.at(i) != nullptr) {
-//            cout << "rehashing value " << endl;
-//            Node* p = old_nodes.at(i);
-//            
-//            size_t hashKey = hashString(p->m_key, 2*m_numBuckets);
-//            Node* next_p = p->next;
-//            Node* temp_p = m_nodes.at(hashKey);
-//            if (temp_p == nullptr) { // when bucket is empty, link node
-//                temp_p = p;
-//                p->next = nullptr; // unlink rest
-//            }
-//            else { // bucket is not empty, must first trace to end of linked list
-//                while (temp_p->next != nullptr)
-//                    temp_p = temp_p->next;
-//                temp_p = p;
-//                p->next = nullptr; // unlink rest
-//            }
-//            
-//            p = next_p;
-//            while (p != nullptr) { // must check entire linked list and insert all of those
-//                hashKey = hashString(p->m_key, 2*m_numBuckets);
-//                temp_p = m_nodes.at(hashKey);
-//                if (temp_p == nullptr) { // when bucket is empty, link node
-//                    temp_p = p;
-//                    p->next = nullptr; // unlink rest
-//                }
-//                else { // bucket is not empty, must first trace to end of linked list
-//                    while (temp_p->next != nullptr)
-//                        temp_p = temp_p->next;
-//                    temp_p = p;
-//                    p->next = nullptr; // unlink rest
-//                }
-//                p = p->next;
-//            }
-//        }
-//    }
-//    m_nodes = temp_nodes; // vector assignment operator should free memory of old hashmap
-//    m_numBuckets *= 2;
 }
 
 template <typename T>
@@ -181,37 +157,6 @@ void HashMap<T>::insert(const std::string& key, const T& value) {
     if (loadFactor() > m_max_load) {
         rehash();
     }
-//    size_t hashKey = hashString(key, m_numBuckets);
-//    if (m_nodes.at(hashKey) == nullptr) { // when bucket is empty, create new node
-//        Node* temp = new Node;
-//        temp->m_key = key;
-//        temp->m_val = value;
-//        temp->next = nullptr;
-//        m_nodes.at(hashKey) = temp;
-//        m_size ++;
-//    }
-//    else { // bucket is not empty, must first trace to end of linked list
-//        Node* p = m_nodes.at(hashKey);
-//        while (p->next != nullptr) {
-//            if (p->m_key == key) {
-//                p->m_val = value; // reassigment if duplicate
-//                return;
-//            }
-//            p = p->next;
-//        }
-//        Node* temp = new Node;
-//        temp->m_key = key;
-//        temp->m_val = value;
-//        temp->next = nullptr;
-//        p->next = temp;
-//        m_size ++;
-//    }
-//    cout << "current load factor: " << loadFactor() << endl;
-//    if (loadFactor() > m_max_load) {
-//        rehash();
-//    }
-////    if (insertHelper(key, value, m_nodes, m_numBuckets))
-////        m_size ++;
 }
 
 template <typename T>
@@ -241,13 +186,15 @@ T& HashMap<T>::operator[](const std::string& key) {
         p = p->next;
     }
     // creating default instance of value and inserting into array
-    T* value = new T();
-    m_map[hashKey] = new Node(key, *value, m_map[hashKey]);
+    Node* head = m_map[hashKey];
+    m_map[hashKey] = new Node;
+    m_map[hashKey]->m_key = key;
+    m_map[hashKey]->next = head;
     m_size ++;
     
     if (loadFactor() > m_max_load) {
         rehash();
     }
-    return *value;
+    return m_map[hashKey]->m_val;
 }
 #endif /* geodb_h */
