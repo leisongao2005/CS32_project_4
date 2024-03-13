@@ -78,5 +78,7 @@ int main() {
             cout << to_string(i) << " v exists" << endl;
         }
     }
-    
+    vector<int> v = a["1"];
+    v.push_back(2);
+    a["1"] = v;
 }

@@ -25,7 +25,6 @@ inline double rad2deg(double rad) {
   return (rad * 180 / pi);
 }
 
-
 inline double distance_earth_km(const GeoPoint &g1, const GeoPoint &g2) {
   double lat1r, lon1r, lat2r, lon2r, u, v;
   lat1r = deg2rad(g1.latitude);

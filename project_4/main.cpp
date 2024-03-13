@@ -60,7 +60,8 @@ int main(int argc, char *argv[])
         cout << "usage: BruinTour mapdata.txt stops.txt\n";
         return 1;
     }
-
+    
+    cout << "reading file: " << argv[1] << endl;
     GeoDatabase geodb;
     if (!geodb.load(argv[1]))
     {

@@ -13,28 +13,28 @@ using namespace std;
 int main() {
 //     get poi location testing
     GeoDatabase g;
-    g.load("mapdata.txt"); // assume this works to avoid error checking
-    // mapdata.txt should have 646 poi?
-    GeoPoint p;
-    if (g.get_poi_location("Saperstein Critical Care Tower", p))
-        cout << "The PoI is at " << p.sLatitude << ", " << p.sLongitude << endl;
-    else
-        cout << "PoI not found!\n";
+    g.load("mapdatatest.txt"); // assume this works to avoid error checking
+//    // mapdata.txt should have 646 poi?
+//    GeoPoint p;
+//    if (g.get_poi_location("20th Century Fox Studios Galaxy Way", p))
+//        cout << "The PoI is at " << p.sLatitude << ", " << p.sLongitude << endl;
+//    else
+//        cout << "PoI not found!\n";
     
 //     get connected points testing
 //    GeoDatabase g;
 //    g.load("mapdata.txt"); // assume this works to avoid error checking
-//    
-    std::vector<GeoPoint> pts = g.get_connected_points(GeoPoint("34.0600768", "-118.4467216"));
-    cout << pts.size() << endl;
-    if (pts.empty())
-        cout << "There are no points connected to your specified point\n";
-    else {
-        for (const auto &p: pts)
-            cout << p.sLatitude << ", " << p.sLongitude << endl;
-    }
     
-    GeoPoint p1("34.0601422", "-118.4468929");
+//    std::vector<GeoPoint> pts = g.get_connected_points(GeoPoint("34.0600768", "-118.4467216"));
+//    cout << pts.size() << endl;
+//    if (pts.empty())
+//        cout << "There are no points connected to your specified point\n";
+//    else {
+//        for (const auto &p: pts)
+//            cout << p.sLatitude << ", " << p.sLongitude << endl;
+//    }
+//    
+    GeoPoint p1("34.0602175", "-118.4464952");
     GeoPoint p2("34.0600768", "-118.4467216");
     cout << g.get_street_name(p1, p2) << endl; // writes "Glenmere Way"
     cout << g.get_street_name(p2, p1) << endl; // writes "Glenmere Way" // writes "a path"

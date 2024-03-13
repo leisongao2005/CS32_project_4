@@ -16,71 +16,52 @@
 using namespace std;
 
 bool GeoDatabase::load(const std::string& map_data_file) {
-    ifstream infile(map_data_file);    // infile is a name of our choosing
-    if (!infile)                // Did opening the file fail?
+    ifstream infile(map_data_file);
+    if (!infile)  // Did opening the file fail?
     {
         cerr << "Error: Cannot open data.txt!" << endl;
         return false;
     }
     string line;
       // getline returns infile; the while tests its success/failure state
-    int counter = 0;
+    
     while (getline(infile, line))
     {
-//        cout << "reading place " << counter << endl;
-        counter ++;
+        // get name first
         istringstream nameString(line);
         string name;
         string name_part;
-        string lat1, long1, lat2, long2;
-        // get name first
         while (nameString >> name_part)
             name += name_part + " ";
         name = name.substr(0, name.size() - 1);
         
-        getline(infile, line);
-        istringstream coordString(line);
         // getting coordinates
+        getline(infile, line);
+        string lat1, long1, lat2, long2;
+        istringstream coordString(line);
         coordString >> lat1 >> long1 >> lat2 >> long2;
         
         // storing street information
         GeoPoint point1 = GeoPoint(lat1, long1);
         GeoPoint point2 = GeoPoint(lat2, long2);
         
-        // for debugging
-//        pair<string, GeoPoint> pair1;
-//        pair1.first = point1.to_string();
-//        pair1.second = point2;
-//        pair<string, GeoPoint> pair2;
-//        pair2.first = point2.to_string();
-//        pair2.second = point1;
-//        pair<string, string> pair3;
-//        pair3.first = point1.to_string() + point2.to_string();
-//        pair3.second = name;
-        
-//        m_connectedPoints.insert(pair1);
-//        m_connectedPoints.insert(pair2);
-//        m_streets.insert(pair3);
-        
-        
 //        cerr << "inserting points: " << endl;
 //        cerr << "point 1: " << point1.to_string() << endl;
 //        cerr << "point 2: " << point2.to_string() << endl << endl;
-//        
-        vector<GeoPoint> v1 = m_connectedPoints[point1.to_string()];
-        v1.push_back(point2);
-        vector<GeoPoint> v2 = m_connectedPoints[point2.to_string()];
-        v2.push_back(point1);
-        
-        m_connectedPoints.insert(point1.to_string(), v1);
-        m_connectedPoints.insert(point2.to_string(), v2);
 
+        m_connectedPoints[point1.to_string()].push_back(point2);
+        
+        m_connectedPoints[point2.to_string()].push_back(point1);
+//        vector<GeoPoint> v1 = m_connectedPoints[point1.to_string()].push_back(point2);
+//        v1.push_back(point2);
+//        vector<GeoPoint> v2 = m_connectedPoints[point2.to_string()];
+//        v2.push_back(point1);
+//        
+//        m_connectedPoints.insert(point1.to_string(), v1);
+//        m_connectedPoints.insert(point2.to_string(), v2);
+//
         m_streets.insert(point1.to_string() + point2.to_string(), name);
-//        m_streets.insert(point2.to_string() + point1.to_string(), name);
-        
-        // end debugging
-        
-        
+
         // checking for pois
         getline(infile, line);
         istringstream numPoiString(line);
@@ -88,7 +69,7 @@ bool GeoDatabase::load(const std::string& map_data_file) {
         
         numPoiString >> numPois;
         if (numPois != 0) { // case where pois must be iterated through
-            
+//            cout << "checking poi" << endl;
             // add midpoint to connected points and streets
             
             vector<GeoPoint> v1 = m_connectedPoints[midpoint(point1, point2).to_string()];
@@ -107,30 +88,32 @@ bool GeoDatabase::load(const std::string& map_data_file) {
             
             m_streets.insert(point1.to_string() + midpoint(point1, point2).to_string(), name);
             m_streets.insert(point2.to_string() + midpoint(point1, point2).to_string(), name);
-//            m_streets.insert(midpoint(point1, point2).to_string() + point1.to_string(), "a path");
-//            m_streets.insert(midpoint(point1, point2).to_string() + point2.to_string(), "a path");
-            
+//            
+////            m_streets.insert(midpoint(point1, point2).to_string() + point1.to_string(), "a path");
+////            m_streets.insert(midpoint(point1, point2).to_string() + point2.to_string(), "a path");
+//            
             for (int i = 0; i < numPois; i ++) {
 //                cout << "inserting poi" << endl;
                 getline(infile, line);
                 istringstream poiString(line);
-                string poiName;
+                string name_part;
                 string name;
                 
                 string lat_val, long_val;
                 bool end = false;
                 
-                while((poiString >> poiName) && !end) {
-                    for (size_t j = 0; j != poiName.size(); j ++) {
-                        if (poiName.at(j) == '|') {
-                            lat_val = poiName.substr(j + 1);
-                            poiName = poiName.substr(0, j);
+                while((poiString >> name_part) && !end) {
+                    for (size_t j = 0; j != name_part.size(); j ++) {
+                        // checking name_part if it contains divider
+                        if (name_part.at(j) == '|') {
+                            lat_val = name_part.substr(j + 1);
+                            name_part = name_part.substr(0, j);
                             end = true;
                             poiString >> long_val;
                             break;
                         }
                     }
-                    name += poiName + " ";
+                    name += name_part + " ";
                 }
                 name = name.substr(0, name.size() - 1); // removing extra space
                 
@@ -147,17 +130,17 @@ bool GeoDatabase::load(const std::string& map_data_file) {
                 m_streets.insert(poi.to_string() + midpoint(point1, point2).to_string(), "a path");
                 // adding to hashmap
 //                cerr << name << endl;
-                
-                // for debugging
-//                pair<string, GeoPoint> pair1;
-//                pair1.first = name;
-//                pair1.second = GeoPoint(lat_val, long_val);
 //                
-//                cout << "inserting with " << pair1.second.to_string() << endl;
-//                m_poiMap.insert(pair1);
+//                // for debugging
+////                pair<string, GeoPoint> pair1;
+////                pair1.first = name;
+////                pair1.second = GeoPoint(lat_val, long_val);
+////                
+////                cout << "inserting with " << pair1.second.to_string() << endl;
+////                m_poiMap.insert(pair1);
                 m_poiMap.insert(name, GeoPoint(lat_val, long_val));
                 
-                // end debugging
+//                 end debugging
             }
         }
     }
@@ -165,7 +148,7 @@ bool GeoDatabase::load(const std::string& map_data_file) {
 }
 
 bool GeoDatabase::get_poi_location(const std::string& poi, GeoPoint& point) const {
-    cout << m_poiMap.size() << endl;
+//    cout << m_poiMap.size() << endl;
     
     // for debugging
 //    if (m_poiMap.find(poi) == m_poiMap.end())
@@ -173,7 +156,7 @@ bool GeoDatabase::get_poi_location(const std::string& poi, GeoPoint& point) cons
 //    else
 //        return true;
     
-    GeoPoint* p = m_poiMap.find(poi);
+    const GeoPoint* p = m_poiMap.find(poi);
     if (p != nullptr) {
         point = *p;
         return true;
@@ -184,7 +167,7 @@ bool GeoDatabase::get_poi_location(const std::string& poi, GeoPoint& point) cons
 }
 
 std::vector<GeoPoint> GeoDatabase::get_connected_points(const GeoPoint& pt) const {
-    vector<GeoPoint>* points = m_connectedPoints.find(pt.to_string());
+    const vector<GeoPoint>* points = m_connectedPoints.find(pt.to_string());
     return *points;
 }
 

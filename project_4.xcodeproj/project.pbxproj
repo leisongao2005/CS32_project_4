@@ -11,8 +11,12 @@
 		D709E8FB2B99800D00433AA5 /* geodbTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E8FA2B99800D00433AA5 /* geodbTest.cpp */; };
 		D709E9132B9CF20500433AA5 /* routertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E9122B9CF20500433AA5 /* routertest.cpp */; };
 		D709E9192B9CF20F00433AA5 /* router.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E9172B9CF20F00433AA5 /* router.cpp */; };
+		D75E30732BA0D86600C831F8 /* geodb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E8F72B997F0500433AA5 /* geodb.cpp */; };
+		D75E30742BA0D86C00C831F8 /* router.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E9172B9CF20F00433AA5 /* router.cpp */; };
+		D75E30752BA0D87000C831F8 /* tour_generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7A6D27C2B9D07A600C9B9C5 /* tour_generator.cpp */; };
+		D75E30762BA0DEEE00C831F8 /* geodb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D709E8F72B997F0500433AA5 /* geodb.cpp */; };
 		D760FE972B9964D6004BD6F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D760FE962B9964D6004BD6F1 /* main.cpp */; };
-		D760FEAB2B99679E004BD6F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D760FEAA2B99679E004BD6F1 /* main.cpp */; };
+		D760FEAB2B99679E004BD6F1 /* hashtest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D760FEAA2B99679E004BD6F1 /* hashtest.cpp */; };
 		D7A6D2782B9D078900C9B9C5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7A6D2772B9D078900C9B9C5 /* main.cpp */; };
 		D7A6D27E2B9D07A600C9B9C5 /* tour_generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7A6D27C2B9D07A600C9B9C5 /* tour_generator.cpp */; };
 /* End PBXBuildFile section */
@@ -75,6 +79,7 @@
 		D709E9122B9CF20500433AA5 /* routertest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = routertest.cpp; sourceTree = "<group>"; };
 		D709E9172B9CF20F00433AA5 /* router.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = router.cpp; sourceTree = "<group>"; };
 		D709E9182B9CF20F00433AA5 /* router.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = router.h; sourceTree = "<group>"; };
+		D75E30772BA0F19200C831F8 /* stopstest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stopstest.txt; sourceTree = "<group>"; };
 		D760FE932B9964D6004BD6F1 /* project_4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = project_4; sourceTree = BUILT_PRODUCTS_DIR; };
 		D760FE962B9964D6004BD6F1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D760FE9D2B99653B004BD6F1 /* mapdata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mapdata.txt; sourceTree = "<group>"; };
@@ -85,7 +90,7 @@
 		D760FEA22B99653B004BD6F1 /* tourcmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tourcmd.h; sourceTree = "<group>"; };
 		D760FEA32B9965C8004BD6F1 /* HashMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HashMap.h; sourceTree = "<group>"; };
 		D760FEA82B99679E004BD6F1 /* Hashmap */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Hashmap; sourceTree = BUILT_PRODUCTS_DIR; };
-		D760FEAA2B99679E004BD6F1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D760FEAA2B99679E004BD6F1 /* hashtest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hashtest.cpp; sourceTree = "<group>"; };
 		D7A6D2752B9D078900C9B9C5 /* tourGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tourGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7A6D2772B9D078900C9B9C5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D7A6D27C2B9D07A600C9B9C5 /* tour_generator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tour_generator.cpp; sourceTree = "<group>"; };
@@ -134,9 +139,7 @@
 		D709E8F12B997EFA00433AA5 /* geodb */ = {
 			isa = PBXGroup;
 			children = (
-				D760FE9D2B99653B004BD6F1 /* mapdata.txt */,
 				D709E8F72B997F0500433AA5 /* geodb.cpp */,
-				D709E8FD2B9A81A400433AA5 /* mapdatatest.txt */,
 				D709E8FA2B99800D00433AA5 /* geodbTest.cpp */,
 				D709E8F82B997F0500433AA5 /* geodb.h */,
 			);
@@ -186,6 +189,9 @@
 				D760FEA12B99653B004BD6F1 /* stops.h */,
 				D760FEA22B99653B004BD6F1 /* tourcmd.h */,
 				D760FE962B9964D6004BD6F1 /* main.cpp */,
+				D75E30772BA0F19200C831F8 /* stopstest.txt */,
+				D709E8FD2B9A81A400433AA5 /* mapdatatest.txt */,
+				D760FE9D2B99653B004BD6F1 /* mapdata.txt */,
 			);
 			path = project_4;
 			sourceTree = "<group>";
@@ -194,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				D760FEA32B9965C8004BD6F1 /* HashMap.h */,
-				D760FEAA2B99679E004BD6F1 /* main.cpp */,
+				D760FEAA2B99679E004BD6F1 /* hashtest.cpp */,
 			);
 			path = HashMap;
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D709E9192B9CF20F00433AA5 /* router.cpp in Sources */,
+				D75E30762BA0DEEE00C831F8 /* geodb.cpp in Sources */,
 				D709E9132B9CF20500433AA5 /* routertest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +376,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D760FE972B9964D6004BD6F1 /* main.cpp in Sources */,
+				D75E30742BA0D86C00C831F8 /* router.cpp in Sources */,
+				D75E30732BA0D86600C831F8 /* geodb.cpp in Sources */,
+				D75E30752BA0D87000C831F8 /* tour_generator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,7 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D760FEAB2B99679E004BD6F1 /* main.cpp in Sources */,
+				D760FEAB2B99679E004BD6F1 /* hashtest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
